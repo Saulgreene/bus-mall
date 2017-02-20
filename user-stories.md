@@ -3,7 +3,8 @@
 -As a user I don't want to see repeated photos
 -As a user I want...
 -As a user I want...
--STRETCH: As a user I want to be able to suggest products to Bus Mall
+-STRETCH: As a user I want some relaxing music playing in the background because I hate planes.
+-STRETCH: As a user I want to be able to suggest products to Bus Mall.
 ----------------------------------
 
 ----------PROBLEM DOMAIN----------
