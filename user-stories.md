@@ -9,6 +9,7 @@
 
 ----------PROBLEM DOMAIN----------
 -I need to create a site that will present pictures to the user and allow them to select which one they prefer the most.
+-I need all pictures to show up the same size.
 -This selection should be recorded and saved for later so I can tell which pictures were most popular.
 -Once a user selects the picture I want new ones to be generated that don't repeat the priors.
 -This should repeat 25 times.
@@ -17,6 +18,7 @@
 
 ----------TECHNICAL REQUIREMENTS----------
 -Generate 3 random images from the image file
+-Make the images show up as the same size
 -Allow user to click on one of the three images
 -Track/Record that click and refresh with 3 more images
 -No repeats of the 3 images from directly before
