@@ -2,14 +2,18 @@
 **USER**
 * As a user I want the site to look simple and put the focus on the images I have to select.
 * As a user I don't want to see repeated photos
+* As a user I want to be able to
 
 **DEVELOPER**
-* As a developer I want to be able to use
-* As a developer I want...
+* As a developer I want to be able to use random generation of photos
+* As a developer I dont want to have to hard code all of my HTML
+* As a developer I want to create a page that can gather information about which picture presented the user likes most
 
 **MARKET RESEARCHER**
-* As a Mar. Researcher I want
-* As a Mar. Researcher I want
+* As a Mar. Researcher I want to know which choices were most popular
+* As a Mar. Researcher I want to know how many times each picture was presented
+* As a Mar. Researcher I want to know how many times each picture was selected
+* As a Mar. Researcher I want to log all of this information for later use
 ----------------------------------
 
 #PROBLEM DOMAIN
