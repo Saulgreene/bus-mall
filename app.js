@@ -2,6 +2,9 @@
 
 // links to the content section of the html and adds an event listener which invokes the handle clikc function when someone clicks within the content tag
 var content = document.getElementById('content');
+// var left = document.getElementById('left');
+// var center = document.getElementById('center');
+// var right = document.getElementById('right');
 content.addEventListener('click', handleClick);
 
 //constructor to save the images and keep track of clicks and show ups
@@ -11,6 +14,8 @@ function imageConstructor(imageID, filePath){
   this.timesClicked = 0;
   this.timesShown = 0;
 };
+var totalClicks = 0;
+var clickLimit = 25;
 
 //prototype added onto the constructor to render a picture to the DOM
   //step 1 it creates an id for the image to reffer to later
@@ -30,11 +35,11 @@ function getRandomInt() {
   return Math.floor(Math.random() * (20 - 0)) + 0;
 }
 
-
 //records the click of the image to the constructor and saves for later
 //it also clears the parent (content box) at the end of the function
 function logClick(imageConstructor) {
   imageConstructor.timesClicked += 1;
+  totalClicks += 1;
   var container = document.getElementById('content');
   container.innerHTML = '';
 }
@@ -54,15 +59,13 @@ var pen = new imageConstructor('pen', 'img/pen.jpg');
 var petSweep = new imageConstructor('pet-sweep', 'img/pet-sweep.jpg');
 var scissors = new imageConstructor('scissors', 'img/scissors.jpg');
 var shark = new imageConstructor('shark', 'img/shark.jpg');
-var sweep = new imageConstructor('sweep', 'img/sweep.jpg');
+var sweep = new imageConstructor('sweep', 'img/sweep.png');
 var tauntaun = new imageConstructor('tauntaun', 'img/tauntaun.jpg');
-var thumbs = new imageConstructor('thumbs', 'img/thumbs.db');
+var thumbs = new imageConstructor('thumbs', 'img/thumbs.jpg');
 var unicorn = new imageConstructor('unicorn', 'img/unicorn.jpg');
 var usb = new imageConstructor('usb', 'img/usb.gif');
 var waterCan = new imageConstructor('water-can', 'img/water-can.jpg');
 var wineGlass = new imageConstructor('wine-glass', 'img/wine-glass.jpg');
-
-var aFuckingArray = [];
 
 var imageConstructorArray = [
   bag,
@@ -86,15 +89,53 @@ var imageConstructorArray = [
   usb,
   waterCan,
   wineGlass,
-] ;
+];
+var threePic = [];
+var oldPics = [];
 // populates three images pulled at an index from the array. the index is a random number
 function populateThree(){
+
+  oldPics = threePic;
+  threePic = [];
   for (var i = 0; i < 3; i++) {
+    console.log('populateThree', i);
     var integerIndex = getRandomInt();
-    //this makes the number we generated storeable since calling the functon just makes a new number
-    imageConstructorArray[integerIndex].addPicture(integerIndex);
+    if(threePic.length === 0){
+      threePic.push(integerIndex);
+      imageConstructorArray[integerIndex].addPicture(integerIndex);
+    }else{
+      console.log('found index in threePic', i);
+      if(threePic.includes(integerIndex)){
+        i--;
+      }else{
+        console.log('index not found in threePic, pushing it in', i);
+        threePic.push(integerIndex);
+        imageConstructorArray[integerIndex].addPicture(integerIndex);
+      }
+    }
   }
+  console.log(threePic);
 };
+//make three elements to populate??
+// function displayPics(){
+//   var leftIndex = getRandomInt();
+//   var centerIndex = getRandomInt();
+//   var rightIndex = getRandomInt();
+//   while (centerIndex === leftIndex){
+//     centerIndex = getRandomInt();
+//   }
+//   while(rightIndex === leftIndex || rightIndex === centerIndex) {
+//     rightIndex = getRandomInt();
+//   }
+//   console.log('leftIndex' + leftIndex);
+//   console.log('centerIndex' + centerIndex);
+//   console.log('rightIndex' + rightIndex);
+//   var currentlyShowing = [leftIndex, centerIndex, rightIndex];
+// }
+// displayPics();
+
+//-------------------------------
+
 //calling the function
 populateThree();
 
