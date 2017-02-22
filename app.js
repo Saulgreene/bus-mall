@@ -2,9 +2,6 @@
 
 // links to the content section of the html and adds an event listener which invokes the handle clikc function when someone clicks within the content tag
 var content = document.getElementById('content');
-// var left = document.getElementById('left');
-// var center = document.getElementById('center');
-// var right = document.getElementById('right');
 content.addEventListener('click', handleClick);
 
 //constructor to save the images and keep track of clicks and show ups
@@ -35,7 +32,6 @@ imageConstructor.prototype.percentage = function(){
   if(isNaN(percentageNum)){
     percentageNum = 0;
   }
-  console.log(percentageNum + '%');
   return percentageNum + '%';
 };
 //gets a random integer between 0-20
@@ -109,8 +105,8 @@ function populateThree(){
       threePic.push(integerIndex);
     }
   }
-  console.log('threePic: ', threePic);
-  console.log('oldPics: ', oldPics);
+  // console.log('threePic: ', threePic);
+  // console.log('oldPics: ', oldPics);
 };
 function showThree(){
   for(var j = 0; j < threePic.length; j++){
@@ -161,29 +157,13 @@ var imageLabelArray = [
   'waterCan',
   'wineGlass',
 ];
-var ctx = document.getElementById('chart').getContext('2d');
+
 //calling the function
 populateThree();
 showThree();
 
 //handle click event logs the click and once it logs and wipes it populates three more
-function handleClick(event){
-  if(totalClicks < clickLimit){
-    console.log('handleClick', event);
-    console.log(event.target.dataset.integerIndex);
-    console.log(imageConstructorArray[event.target.dataset.integerIndex]);
-    logClick(imageConstructorArray[event.target.dataset.integerIndex]);
-    populateThree();
-    showThree();
-  }else{
-    for( var k = 0; k < imageConstructorArray.length; k++){
-      var percentShown = imageConstructorArray[k].percentage();
-      console.log(imageConstructorArray[k].imageID, percentShown);
-      percentArray.push(percentShown);
-    };
-    console.log(percentArray);
-  }
-};
+var ctx = document.getElementById('chart').getContext('2d');
 var chartData = {
   type: 'bar',
   data: {
@@ -204,5 +184,23 @@ var chartData = {
     }
   }
 };
-
 var myChart = new Chart(ctx, chartData);
+
+function handleClick(event){
+  if(totalClicks < clickLimit){
+    // console.log('handleClick', event);
+    // console.log(event.target.dataset.integerIndex);
+    // console.log(imageConstructorArray[event.target.dataset.integerIndex]);
+    logClick(imageConstructorArray[event.target.dataset.integerIndex]);
+    console.log('Click Count: ' + totalClicks);
+    populateThree();
+    showThree();
+  }else{
+    for( var k = 0; k < imageConstructorArray.length; k++){
+      var percentShown = imageConstructorArray[k].percentage();
+      console.log(imageConstructorArray[k].imageID, percentShown);
+      percentArray.push(percentShown);
+    };
+    console.log(percentArray);
+  }
+};
