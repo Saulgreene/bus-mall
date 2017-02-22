@@ -117,7 +117,51 @@ function showThree(){
     imageConstructorArray[threePic[j]].addPicture(threePic[j]);
   }
 }
-
+var colorsArray = [
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'red',
+  'orange',
+];
+var imageLabelArray = [
+  'bag',
+  'banana',
+  'bathroom',
+  'boots',
+  'breakfast',
+  'bubblegum',
+  'chair',
+  'cthulhu',
+  'dogDuck',
+  'dragon',
+  'pen',
+  'petSweep',
+  'scissors',
+  'shark',
+  'sweep',
+  'tauntaun',
+  'unicorn',
+  'usb',
+  'waterCan',
+  'wineGlass',
+];
+var ctx = document.getElementById('chart').getContext('2d');
 //calling the function
 populateThree();
 showThree();
@@ -138,12 +182,27 @@ function handleClick(event){
       percentArray.push(percentShown);
     };
     console.log(percentArray);
-    // alert('I deserve 100% Frazier!!!');
-    // var grade = prompt('Now, what grade do i desrve? number value please...');
-    // if(prompt === '100'){
-    //   alert('Thanks!!');
-    // }else{
-    //   alert('you are dead to me');
-    // }
   }
 };
+var chartData = {
+  type: 'bar',
+  data: {
+    labels: imageLabelArray,
+    datasets: [{
+      label: '# of Votes / Picture',
+      data: percentArray,
+      backgroundColor: colorsArray,
+    }],
+  },
+  options:{
+    scales:{
+      yAxes:[{
+        ticks:{
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+};
+
+var myChart = new Chart(ctx, chartData);
