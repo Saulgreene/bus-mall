@@ -113,79 +113,9 @@ function showThree(){
     imageConstructorArray[threePic[j]].addPicture(threePic[j]);
   }
 }
-var colorsArray = [
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'red',
-  'orange',
-];
-var imageLabelArray = [
-  'bag',
-  'banana',
-  'bathroom',
-  'boots',
-  'breakfast',
-  'bubblegum',
-  'chair',
-  'cthulhu',
-  'dogDuck',
-  'dragon',
-  'pen',
-  'petSweep',
-  'scissors',
-  'shark',
-  'sweep',
-  'tauntaun',
-  'unicorn',
-  'usb',
-  'waterCan',
-  'wineGlass',
-];
-
 //calling the function
 populateThree();
 showThree();
-
-//handle click event logs the click and once it logs and wipes it populates three more
-var ctx = document.getElementById('chart').getContext('2d');
-var chartData = {
-  type: 'bar',
-  data: {
-    labels: imageLabelArray,
-    datasets: [{
-      label: '# of Votes / Picture',
-      data: percentArray,
-      backgroundColor: colorsArray,
-    }],
-  },
-  options:{
-    scales:{
-      yAxes:[{
-        ticks:{
-          beginAtZero: true
-        }
-      }]
-    }
-  }
-};
-var myChart = new Chart(ctx, chartData);
-
 function handleClick(event){
   if(totalClicks < clickLimit){
     // console.log('handleClick', event);
@@ -201,6 +131,18 @@ function handleClick(event){
       console.log(imageConstructorArray[k].imageID, percentShown);
       percentArray.push(percentShown);
     };
-    console.log(percentArray);
+    saveProductsToLocalStorage(imageConstructorArray);
+    console.log(imageConstructorArray);
+    savePercentageToLocalStorage(percentArray);
+    console.log(savePercentageToLocalStorage);
   }
+};
+
+function saveProductsToLocalStorage(imageConstructorArray){
+  localStorage.imageConstructorArray = JSON.stringify(imageConstructorArray);
+  console.log('Saved To Local Storage');
+};
+function savePercentageToLocalStorage(percentArray){
+  localStorage.percentArray = JSON.stringify(percentArray);
+  console.log('Saved To Local Storage');
 };
