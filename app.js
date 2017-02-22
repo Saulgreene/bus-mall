@@ -30,9 +30,17 @@ imageConstructor.prototype.addPicture = function(index){
   imageContainer.appendChild(image);
   this.timesShown += 1;
 };
+imageConstructor.prototype.percentage = function(){
+  var percentageNum = ((this.timesClicked / this.timesShown) * 100);
+  if(isNaN(percentageNum)){
+    percentageNum = 0;
+  }
+  console.log(percentageNum + '%');
+  return percentageNum + '%';
+};
 //gets a random integer between 0-20
 function getRandomInt() {
-  return Math.floor(Math.random() * (20 - 0)) + 0;
+  return Math.floor(Math.random() * (imageConstructorArray.length - 0)) + 0;
 }
 
 //records the click of the image to the constructor and saves for later
@@ -44,8 +52,7 @@ function logClick(imageConstructor) {
   container.innerHTML = '';
 }
 
-
-var bag = new imageConstructor('cthulhu', 'img/cthulhu.jpg');
+var bag = new imageConstructor('bag', 'img/bag.jpg');
 var banana = new imageConstructor('banana', 'img/banana.jpg');
 var bathroom = new imageConstructor('bathroom', 'img/bathroom.jpg');
 var boots = new imageConstructor('boots', 'img/boots.jpg');
@@ -61,7 +68,6 @@ var scissors = new imageConstructor('scissors', 'img/scissors.jpg');
 var shark = new imageConstructor('shark', 'img/shark.jpg');
 var sweep = new imageConstructor('sweep', 'img/sweep.png');
 var tauntaun = new imageConstructor('tauntaun', 'img/tauntaun.jpg');
-var thumbs = new imageConstructor('thumbs', 'img/thumbs.jpg');
 var unicorn = new imageConstructor('unicorn', 'img/unicorn.jpg');
 var usb = new imageConstructor('usb', 'img/usb.gif');
 var waterCan = new imageConstructor('water-can', 'img/water-can.jpg');
@@ -84,66 +90,60 @@ var imageConstructorArray = [
   shark,
   sweep,
   tauntaun,
-  thumbs,
   unicorn,
   usb,
   waterCan,
   wineGlass,
 ];
+var percentArray = [];
 var threePic = [];
 var oldPics = [];
+var numOfPics = 3;
 // populates three images pulled at an index from the array. the index is a random number
 function populateThree(){
-
   oldPics = threePic;
   threePic = [];
-  for (var i = 0; i < 3; i++) {
-    console.log('populateThree', i);
+  while (threePic.length < numOfPics) {
     var integerIndex = getRandomInt();
-    if(threePic.length === 0){
+    if (threePic.indexOf(integerIndex) === -1 && oldPics.indexOf(integerIndex) === -1) {
       threePic.push(integerIndex);
-      imageConstructorArray[integerIndex].addPicture(integerIndex);
-    }else{
-      console.log('found index in threePic', i);
-      if(threePic.includes(integerIndex)){
-        i--;
-      }else{
-        console.log('index not found in threePic, pushing it in', i);
-        threePic.push(integerIndex);
-        imageConstructorArray[integerIndex].addPicture(integerIndex);
-      }
     }
   }
-  console.log(threePic);
+  console.log('threePic: ', threePic);
+  console.log('oldPics: ', oldPics);
 };
-//make three elements to populate??
-// function displayPics(){
-//   var leftIndex = getRandomInt();
-//   var centerIndex = getRandomInt();
-//   var rightIndex = getRandomInt();
-//   while (centerIndex === leftIndex){
-//     centerIndex = getRandomInt();
-//   }
-//   while(rightIndex === leftIndex || rightIndex === centerIndex) {
-//     rightIndex = getRandomInt();
-//   }
-//   console.log('leftIndex' + leftIndex);
-//   console.log('centerIndex' + centerIndex);
-//   console.log('rightIndex' + rightIndex);
-//   var currentlyShowing = [leftIndex, centerIndex, rightIndex];
-// }
-// displayPics();
-
-//-------------------------------
+function showThree(){
+  for(var j = 0; j < threePic.length; j++){
+    imageConstructorArray[threePic[j]].addPicture(threePic[j]);
+  }
+}
 
 //calling the function
 populateThree();
+showThree();
 
 //handle click event logs the click and once it logs and wipes it populates three more
 function handleClick(event){
-  console.log('handleClick', event);
-  console.log(event.target.dataset.integerIndex);
-  console.log(imageConstructorArray[event.target.dataset.integerIndex]);
-  logClick(imageConstructorArray[event.target.dataset.integerIndex]);
-  populateThree();
+  if(totalClicks < clickLimit){
+    console.log('handleClick', event);
+    console.log(event.target.dataset.integerIndex);
+    console.log(imageConstructorArray[event.target.dataset.integerIndex]);
+    logClick(imageConstructorArray[event.target.dataset.integerIndex]);
+    populateThree();
+    showThree();
+  }else{
+    for( var k = 0; k < imageConstructorArray.length; k++){
+      var percentShown = imageConstructorArray[k].percentage();
+      console.log(imageConstructorArray[k].imageID, percentShown);
+      percentArray.push(percentShown);
+    };
+    console.log(percentArray);
+    // alert('I deserve 100% Frazier!!!');
+    // var grade = prompt('Now, what grade do i desrve? number value please...');
+    // if(prompt === '100'){
+    //   alert('Thanks!!');
+    // }else{
+    //   alert('you are dead to me');
+    // }
+  }
 };
