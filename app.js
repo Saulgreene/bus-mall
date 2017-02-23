@@ -2,9 +2,6 @@
 
 // links to the content section of the html and adds an event listener which invokes the handle clikc function when someone clicks within the content tag
 var content = document.getElementById('content');
-// var left = document.getElementById('left');
-// var center = document.getElementById('center');
-// var right = document.getElementById('right');
 content.addEventListener('click', handleClick);
 
 //constructor to save the images and keep track of clicks and show ups
@@ -35,8 +32,7 @@ imageConstructor.prototype.percentage = function(){
   if(isNaN(percentageNum)){
     percentageNum = 0;
   }
-  console.log(percentageNum + '%');
-  return percentageNum + '%';
+  return percentageNum;
 };
 //gets a random integer between 0-20
 function getRandomInt() {
@@ -95,10 +91,24 @@ var imageConstructorArray = [
   waterCan,
   wineGlass,
 ];
+
+var cumulativeArray = [];
 var percentArray = [];
+var newData = [];
+var oldData = [];
 var threePic = [];
 var oldPics = [];
 var numOfPics = 3;
+
+if (localStorage.imageConstructorArray) {
+  cumulativeArray = JSON.parse(localStorage.imageConstructorArray);
+  console.log('crap was in local storage!');
+  for (var i = 0; i < cumulativeArray.length; i++) {
+    imageConstructorArray[i].timesClicked += cumulativeArray[i].timesClicked;
+    imageConstructorArray[i].timesShown += cumulativeArray[i].timesShown;
+  }
+  saveProductsToLocalStorage(imageConstructorArray);
+}
 // populates three images pulled at an index from the array. the index is a random number
 function populateThree(){
   oldPics = threePic;
@@ -109,70 +119,24 @@ function populateThree(){
       threePic.push(integerIndex);
     }
   }
-  console.log('threePic: ', threePic);
-  console.log('oldPics: ', oldPics);
+  // console.log('threePic: ', threePic);
+  // console.log('oldPics: ', oldPics);
 };
 function showThree(){
   for(var j = 0; j < threePic.length; j++){
     imageConstructorArray[threePic[j]].addPicture(threePic[j]);
   }
 }
-var colorsArray = [
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'red',
-  'orange',
-];
-var imageLabelArray = [
-  'bag',
-  'banana',
-  'bathroom',
-  'boots',
-  'breakfast',
-  'bubblegum',
-  'chair',
-  'cthulhu',
-  'dogDuck',
-  'dragon',
-  'pen',
-  'petSweep',
-  'scissors',
-  'shark',
-  'sweep',
-  'tauntaun',
-  'unicorn',
-  'usb',
-  'waterCan',
-  'wineGlass',
-];
-var ctx = document.getElementById('chart').getContext('2d');
 //calling the function
 populateThree();
 showThree();
-
-//handle click event logs the click and once it logs and wipes it populates three more
 function handleClick(event){
   if(totalClicks < clickLimit){
-    console.log('handleClick', event);
-    console.log(event.target.dataset.integerIndex);
-    console.log(imageConstructorArray[event.target.dataset.integerIndex]);
+    // console.log('handleClick', event);
+    // console.log(event.target.dataset.integerIndex);
+    // console.log(imageConstructorArray[event.target.dataset.integerIndex]);
     logClick(imageConstructorArray[event.target.dataset.integerIndex]);
+    console.log('Click Count: ' + totalClicks);
     populateThree();
     showThree();
   }else{
@@ -181,28 +145,36 @@ function handleClick(event){
       console.log(imageConstructorArray[k].imageID, percentShown);
       percentArray.push(percentShown);
     };
-    console.log(percentArray);
-  }
-};
-var chartData = {
-  type: 'bar',
-  data: {
-    labels: imageLabelArray,
-    datasets: [{
-      label: '# of Votes / Picture',
-      data: percentArray,
-      backgroundColor: colorsArray,
-    }],
-  },
-  options:{
-    scales:{
-      yAxes:[{
-        ticks:{
-          beginAtZero: true
-        }
-      }]
+    // saveProductsToLocalStorage(imageConstructorArray);
+    // console.log(imageConstructorArray);
+    // savePercentageToLocalStorage(percentArray);
+    // console.log(savePercentageToLocalStorage);
+    // for (var i = 0; i < percentArray.length; i++) {
+    //   var total = percentArray[i] + newData[i];
+    //   newData.push(total);
+    // }
+    var clickArray = [];
+    for(var i = 0; i < imageConstructorArray.length; i++) {
+      clickArray.push(imageConstructorArray[i].timesClicked);
     }
+    console.log(clickArray);
+    saveClickToLocalStorage(clickArray);
+    saveProductsToLocalStorage(imageConstructorArray);
+    savePercentageToLocalStorage(percentArray);
+    console.log(localStorage.clickArray);
+    location.href = 'charts.html';
   }
 };
 
-var myChart = new Chart(ctx, chartData);
+function saveProductsToLocalStorage(imageConstructorArray){
+  localStorage.imageConstructorArray = JSON.stringify(imageConstructorArray);
+  console.log('Saved To Local Storage');
+};
+function saveClickToLocalStorage(clickArray){
+  localStorage.clickArray = JSON.stringify(clickArray);
+  console.log('Saved To Local Storage');
+};
+function savePercentageToLocalStorage(percentArray){
+  localStorage.percentArray = JSON.stringify(percentArray);
+  console.log('Saved To Local Storage');
+};

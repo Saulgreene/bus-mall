@@ -1,16 +1,16 @@
 *{
   background-color: lightgrey;
-}
-h1{
-text-align: center;
-}
-div{
-  width: 75%;
-  height: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10%;
-  border: 3px solid darkgrey;
+}
+h1{
+  text-align: center;
+}
+a{
+  text-align: center;
+}
+#content{
+text-align: center;
 }
 img{
   width: 250px;
