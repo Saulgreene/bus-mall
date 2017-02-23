@@ -1,5 +1,16 @@
 *{
   background-color: lightgrey;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1{
+  text-align: center;
+}
+a{
+  text-align: center;
+}
+#content{
+text-align: center;
 }
 img{
   width: 250px;

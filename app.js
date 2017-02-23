@@ -149,7 +149,6 @@ function handleClick(event){
     // console.log(imageConstructorArray);
     // savePercentageToLocalStorage(percentArray);
     // console.log(savePercentageToLocalStorage);
-    // location.href = 'charts.html';
     // for (var i = 0; i < percentArray.length; i++) {
     //   var total = percentArray[i] + newData[i];
     //   newData.push(total);
@@ -163,6 +162,7 @@ function handleClick(event){
     saveProductsToLocalStorage(imageConstructorArray);
     savePercentageToLocalStorage(percentArray);
     console.log(localStorage.clickArray);
+    location.href = 'charts.html';
   }
 };
 
