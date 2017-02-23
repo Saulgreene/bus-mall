@@ -1,18 +1,6 @@
 *{
   background-color: lightgrey;
 }
-div{
-  width: 50%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10%;
-  border: 3px solid black;
-}
-#content{
-  margin-left: auto;
-  margin-right: auto;
-}
 img{
   width: 250px;
   height: 250px;

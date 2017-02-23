@@ -92,6 +92,8 @@ var imageConstructorArray = [
   wineGlass,
 ];
 var percentArray = [];
+var newData = [];
+var oldData = [];
 var threePic = [];
 var oldPics = [];
 var numOfPics = 3;
@@ -135,14 +137,19 @@ function handleClick(event){
     console.log(imageConstructorArray);
     savePercentageToLocalStorage(percentArray);
     console.log(savePercentageToLocalStorage);
+    // location.href = 'charts.html';
+    for (var i = 0; i < percentArray.length; i++) {
+      var total = percentArray[i] + newData[i];
+      newData.push(total);
+    }
   }
 };
 
-function saveProductsToLocalStorage(imageConstructorArray){
-  localStorage.imageConstructorArray = JSON.stringify(imageConstructorArray);
-  console.log('Saved To Local Storage');
-};
-function savePercentageToLocalStorage(percentArray){
-  localStorage.percentArray = JSON.stringify(percentArray);
+// function saveProductsToLocalStorage(imageConstructorArray){
+//   localStorage.imageConstructorArray = JSON.stringify(imageConstructorArray);
+//   console.log('Saved To Local Storage');
+// };
+function saveClickToLocalStorage(clickArray){
+  localStorage.clickArray = JSON.stringify(clickArray);
   console.log('Saved To Local Storage');
 };
