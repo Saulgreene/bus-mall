@@ -46,7 +46,9 @@ var imageLabelArray = [
 ];
 
 var imageConstructorArray = JSON.parse(localStorage.imageConstructorArray);
-// var percentArray = JSON.parse(localStorage.percentArray);
+var clickArray = JSON.parse(localStorage.clickArray);
+var perc = JSON.parse(localStorage.percentArray);
+console.log(perc);
 
 var productClicks = [];
 function allProductClicks(products){
@@ -76,7 +78,7 @@ var chartData = {
     labels: imageLabelArray,
     datasets: [{
       label: '# of Votes / Picture',
-      data: productClicks,
+      data: perc,
       backgroundColor: 'grey',
     }],
   },
