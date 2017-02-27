@@ -2,11 +2,11 @@
 **USER**
 * As a user I want the site to look simple and put the focus on the images I have to select.
 * As a user I don't want to see repeated photos
-* As a user I want to be able to
+* As a user I want to be able to see which photos other users liked the most as well as my own.
 
 **DEVELOPER**
 * As a developer I want to be able to use random generation of photos
-* As a developer I dont want to have to hard code all of my HTML
+* As a developer I don't want to have to hard code all of my HTML
 * As a developer I want to create a page that can gather information about which picture presented the user likes most
 
 **MARKET RESEARCHER**
