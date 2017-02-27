@@ -1,3 +1,16 @@
+.content {
+  background: #2db34a;
+  border-radius: 6px;
+  transition-property: background, border-radius;
+  transition-duration: .2s, 1s;
+  transition-timing-function: linear;
+}
+.content:hover {
+  background: #ff7b29;
+  border-radius: 50%;
+}
+
+
 *{
   background-color: lightgrey;
   margin-left: auto;
